@@ -23,7 +23,7 @@ Route::get('/', [GuestHomeController::class, 'index'])->name('guest.home');
 Route::prefix('/admin')->name('admin.')->middleware(['auth'])->group(function () {
     Route::get('/', [AdminHomeController::class, 'index'])->name('home');
 
-    Route::get('/pojects', [ProjectController::class, 'index'])->name('projects.index');
+    Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
     Route::get('/pojects/create', [ProjectController::class, 'create'])->name('projects.create');
     Route::get('/pojects/{project}', [ProjectController::class, 'show'])->name('projects.show');
     Route::get('/pojects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
