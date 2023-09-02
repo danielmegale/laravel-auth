@@ -37,7 +37,8 @@
                             </a>
                             <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-sm btn-warning ms-2"><i
                                     class="fas fa-pencil"></i></a>
-                            <form action="{{ route('admin.projects.destroy', $project) }}" method="POST" class="ms-2">
+                            <form action="{{ route('admin.projects.destroy', $project) }}" method="POST"
+                                class="ms-2 delete-form">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-sm btn-danger">
@@ -58,4 +59,8 @@
         </tbody>
     </table>
 
+@endsection
+
+@section('scripts')
+    @vite('resources/js/delete-confirmation.js')
 @endsection

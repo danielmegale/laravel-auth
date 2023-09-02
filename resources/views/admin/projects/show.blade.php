@@ -21,7 +21,7 @@
         <div class="d-flex justify-content-end">
             <a href="{{ route('admin.projects.edit', $project) }}" class="btn  btn-warning ms-2"><i
                     class="fas fa-pencil me-2"></i>Modifica</a>
-            <form action="{{ route('admin.projects.destroy', $project) }}" method="POST" class="ms-2">
+            <form action="{{ route('admin.projects.destroy', $project) }}" method="POST" class="ms-2 delete-form">
                 @csrf
                 @method('DELETE')
                 <button class="btn  btn-danger">
@@ -30,4 +30,8 @@
             </form>
         </div>
     </footer>
+@endsection
+
+@section('scripts')
+    @vite('resources/js/delete-confirmation.js')
 @endsection
