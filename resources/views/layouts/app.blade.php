@@ -33,7 +33,9 @@
 
         @include('includes.layout.navbar')
 
+
         <main class="container mt-3">
+            @include('includes.layout.alert')
             @yield('content')
         </main>
     </div>
