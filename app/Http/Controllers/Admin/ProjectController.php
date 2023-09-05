@@ -65,7 +65,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -73,7 +73,25 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'image' => 'required|image',
+            'url' => 'required|string',
+        ]);
+        $data = $request->all();
+        $project = new Project();
+        if (array_key_exists('image', $data)) {
+            $img_url = Storage::putFile('project_images', $data['image']);
+            $data['image'] = $img_url;
+        }
+        $project->title = $data['title'];
+        $project->image = $data['image'];
+        $project->url = $data['url'];
+        $project->description = $data['description'];
+        $project->save();
+
+        return to_route('admin.projects.show', $project)->with('alert-type', 'success')->with('alert-message', 'Progetto Modificato con Successo');
     }
 
     /**
