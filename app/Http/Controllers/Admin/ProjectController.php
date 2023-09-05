@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -20,9 +21,9 @@ class ProjectController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Project $project)
     {
-        return view('admin.projects.create');
+        return view('admin.projects.create', compact('project'));
     }
 
     /**
@@ -30,9 +31,22 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'image' => 'required|image',
+            'url' => 'required|string',
+        ]);
         $data = $request->all();
         $project = new Project();
-        $project->fill($data);
+        if (array_key_exists('image', $data)) {
+            $img_url = Storage::putFile('project_images', $data['image']);
+            $data['image'] = $img_url;
+        }
+        $project->title = $data['title'];
+        $project->image = $data['image'];
+        $project->url = $data['url'];
+        $project->description = $data['description'];
         $project->save();
 
         return to_route('admin.projects.show', $project)->with('alert-type', 'success')->with('alert-message', 'Progetto Creato con Successo');

@@ -7,7 +7,7 @@
         <h1>Crea Progetto</h1>
     </header>
     <hr>
-    <form method="POST" action="{{ route('admin.projects.store') }}">
+    <form method="POST" action="{{ route('admin.projects.store') }}" enctype="multipart/form-data">
         @csrf
 
         <div class="row">
@@ -29,13 +29,13 @@
             <div class="col-11">
                 <div class="mb-3">
                     <label for="image" class="form-label">Immagine</label>
-                    <input type="url" class="form-control" id="image" name="image"
-                        placeholder="Inserisci un URL valido" value="{{ old('image') }}">
+                    <input type="file" class="form-control" id="image" name="image"
+                        placeholder="Inserisci un URL valido">
                 </div>
             </div>
             <div class="col-1">
-                <img src="{{ old('image', 'https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg') }}"
-                    alt="Preview" class="img-fluid" id="image-preview">
+                <img src="{{ $project->image ? asset('storage/' . $project->image) : '' }}" alt="Preview" class="img-fluid"
+                    id="image-preview">
             </div>
             <div class="col-12">
                 <div class="mb-3">
@@ -69,7 +69,8 @@
 @endsection
 
 
-$table->string('title', 50)->unique();
+{{-- $table->string('title', 50)->unique(); 
 $table->string('image')->nullable();
 $table->string('url')->unique();
 $table->text('description');
+--}}
