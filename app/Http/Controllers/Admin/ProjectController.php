@@ -76,22 +76,21 @@ class ProjectController extends Controller
         $request->validate([
             'title' => 'required|string',
             'description' => 'required|string',
-            'image' => 'required|image',
+            'image' => 'image',
             'url' => 'required|string',
+        ], [
+            'title.required' => 'required',
+            'description.required' => 'required',
+            'url.required' => 'required',
         ]);
         $data = $request->all();
-        $project = new Project();
+        $project->update($data);
         if (array_key_exists('image', $data)) {
             $img_url = Storage::putFile('project_images', $data['image']);
             $data['image'] = $img_url;
         }
-        $project->title = $data['title'];
-        $project->image = $data['image'];
-        $project->url = $data['url'];
-        $project->description = $data['description'];
-        $project->save();
-
-        return to_route('admin.projects.show', $project)->with('alert-type', 'success')->with('alert-message', 'Progetto Modificato con Successo');
+        $project->update($data);
+        return to_route('admin.projects.show', compact('project'))->with('alert-type', 'success')->with('alert-message', 'Progetto Modificato con Successo');
     }
 
     /**

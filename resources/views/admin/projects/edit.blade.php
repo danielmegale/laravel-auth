@@ -4,10 +4,11 @@
 
 @section('content')
     <header>
-        <h1>Crea Progetto</h1>
+        <h1>Modifica Progetto</h1>
     </header>
     <hr>
-    <form method="POST" action="{{ route('admin.projects.update', $project) }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('admin.projects.update', ['project' => $project->id]) }}"
+        enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="row">
@@ -47,8 +48,7 @@
         </div>
 
         <div class="d-flex justify-content-end">
-            <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-warning ms-2"><i
-                    class="fas fa-pencil me-2"></i>Modifica</a>
+            <button class="btn btn-warning ms-2" type="submit">Modifica</button>
         </div>
     </form>
 
