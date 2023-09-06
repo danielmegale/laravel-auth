@@ -12,16 +12,24 @@
     <div class="col-12">
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="Inserisci il Titolo"
-                value="{{ old('title', $project->title) }}" maxlength="50" required>
+            <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
+                name="title" placeholder="Inserisci il Titolo" value="{{ old('title', $project->title) }}"
+                maxlength="50">
+            @error('title')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
     </div>
     <div class="col-12">
         <div class="mb-3">
             <label for="description" class="form-label">Descrizione</label>
-            <textarea class="form-control" name="description" id="description" rows="10">
+            <textarea class="form-control  @error('description') is-invalid @enderror" name="description" id="description"
+                rows="10">
                         {{ old('description', $project->description) }}
                     </textarea>
+            @error('description')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
     </div>
     <div class="col-11">

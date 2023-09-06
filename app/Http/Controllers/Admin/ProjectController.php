@@ -32,12 +32,18 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required|string',
-            'description' => 'required|string',
-            'image' => 'required|image',
-            'url' => 'required|string',
-        ]);
+        $request->validate(
+            [
+                'title' => 'required|string',
+                'description' => 'required|string',
+                'image' => 'nullable|image',
+                'url' => 'nullable|string',
+            ],
+            [
+                'title.required' => 'Il titolo è obligatorio',
+                'description.required' => 'La descrizione è obligatoria'
+            ]
+        );
         $data = $request->all();
         $project = new Project();
         if (array_key_exists('image', $data)) {
@@ -74,16 +80,18 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        $request->validate([
-            'title' => 'required|string',
-            'description' => 'required|string',
-            'image' => 'image',
-            'url' => 'required|string',
-        ], [
-            'title.required' => 'required',
-            'description.required' => 'required',
-            'url.required' => 'required',
-        ]);
+        $request->validate(
+            [
+                'title' => 'required|string',
+                'description' => 'required|string',
+                'image' => 'nullable|image',
+                'url' => 'nullable|string',
+            ],
+            [
+                'title.required' => 'Il titolo è obligatorio',
+                'description.required' => 'La descrizione è obligatoria'
+            ]
+        );
         $data = $request->all();
         $project->update($data);
         if (array_key_exists('image', $data)) {
