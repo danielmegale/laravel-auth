@@ -23,6 +23,7 @@ class ProjectController extends Controller
      */
     public function create(Project $project)
     {
+        $project = new Project();
         return view('admin.projects.create', compact('project'));
     }
 

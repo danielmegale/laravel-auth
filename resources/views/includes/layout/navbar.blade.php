@@ -24,6 +24,10 @@
                     <a class="nav-link @if (request()->routeIs('home')) active @endif"
                         href="{{ url('/') }}">{{ __('Home') }}</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link @if (request()->routeIs('Projects')) active @endif"
+                        href="{{ route('admin.projects.index') }}">{{ __('Projects') }}</a>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->
