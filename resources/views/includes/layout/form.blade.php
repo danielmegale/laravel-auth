@@ -36,7 +36,7 @@
         <div class="mb-3">
             <label for="image" class="form-label">Immagine</label>
             <input type="file" class="form-control" id="image" name="image"
-                placeholder="Inserisci un URL valido" value="{{ old('image', $project->image) }}">
+                placeholder="Inserisci un URL valido">
         </div>
     </div>
     <div class="col-1">

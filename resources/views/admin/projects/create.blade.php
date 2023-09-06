@@ -13,21 +13,5 @@
 @endsection
 
 @section('scripts')
-    <script>
-        const placeholder =
-            'https://img.freepik.com/premium-vector/photo-icon-picture-icon-image-sign-symbol-vector-illustration_64749-4409.jpg'
-        const imageFiled = document.getElementById('image');
-        const previewField = document.getElementById('image-preview');
-
-        imageFiled.addEventListener('input', () => {
-            previewField.src = imageFiled.value ? imageFiled.value : placeholder
-        });
-    </script>
+    @vite('resources/js/image-preview.js')
 @endsection
-
-
-{{-- $table->string('title', 50)->unique(); 
-$table->string('image')->nullable();
-$table->string('url')->unique();
-$table->text('description');
---}}
